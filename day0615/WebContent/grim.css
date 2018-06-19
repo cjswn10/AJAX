@@ -1,0 +1,49 @@
+@CHARSET "EUC-KR";
+
+a {
+	background: orange;
+	margin: 0px 10px 0px 10px;
+}
+
+a:link {
+    color: black; 
+    background-color: transparent; 
+    text-decoration: none;
+}
+
+a:visited {
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+a:active {
+    color: teal;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+.main {
+	font-size: 50px;
+	
+}
+.upper {
+	float: right;
+	overflow: hidden;
+	margin-right: 40px;
+}
+
+hr {
+	color: 
+}
+.main_menu {
+	margin: 0px 20px 0px 30px;
+	font-size: 30px;
+}
+
+.menus {
+}
+
+li{
+	list-style: none;
+}

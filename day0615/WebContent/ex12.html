@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	$("button").click(function() {
+		$.ajax({
+			url: "hello.jsp",
+			success: function(r) {
+				$("h1").html(r);
+			}
+		});
+	});
+});
+
+</script>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1></h1>
+	<button>Ajax통신</button>
+</body>
+</html>

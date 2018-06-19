@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#detail {
+	border: 5px solid white;
+	position: fixed;
+	top: 10px;
+	left: 800px;
+	width: 500px;
+	padding: 30px;
+	text-align: center;
+}
+</style>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+$(function() {
+		
+		$("#tb").html("<tr><td>상품번호</td><td>상품명</td><td>가격</td><td>수량</td><td>사진</td></tr>");
+		$.ajax ("listGoods.jsp", {
+			success: function(data) {
+				var arr = eval("(" + data + ")");
+				
+				$.each(arr, function(i, g) {
+					var tr = $("<tr></tr>");
+					
+					$.each(g, function(j, tds) {
+						var td = $("<td></td>");
+						if(j == 'fname'){
+							//j는 속성명
+							var img = $("<img>").attr({
+								src: "img/"+g.fname,
+								width: 100,
+								height: 100
+							});
+
+							$(td).append(img);
+							
+						} else {
+							$(td).html(tds);
+						}
+						$(tr).append(td);
+						
+					})
+
+					$("#tb").append(tr);
+					
+					
+					$(tr).mouseover(function() {
+						$("#detail").empty().attr("border-color", "pink");
+						
+						var img = $(this).find("img").clone().attr({
+							
+							width: 400,
+							height: 400
+						});
+						var br = $("<br>");
+						
+						
+						$("#detail").append(img, br);
+						$("#detail").append("상품번호:" + g.no + "&nbsp;&nbsp;&nbsp;");
+						$("#detail").append("상품명:" + g.item + "&nbsp;&nbsp;&nbsp;");
+						$("#detail").append("가격:" + g.price + "&nbsp;&nbsp;&nbsp;");
+						$("#detail").append("수량:" + g.qty);
+					});
+					
+				});
+			}
+		});
+		
+		
+});
+</script>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	<h2>상품목록</h2>
+	<table width="100%">
+		<tr>
+			<td width="50%">
+				<table id="tb" border="1"  width="100%"></table>
+			</td>
+			<td>
+				<div id="detail"></div>
+			</td>
+		</tr>
+	</table>
+	
+</body>
+</html>

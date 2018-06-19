@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript">
+	window.onload = function() {
+		
+		document.getElementById("btnOk").onclick = function() {
+			var request = new XMLHttpRequest();
+			request.open("GET", "hello.jsp", false);
+			request.send();
+			document.getElementById("msg").innerHTML = request.responseText;
+		}
+	}
+</script>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	<button id="btnOk">Ajax통신</button>
+	<hr>
+	<h2>Ajax통신 재미있어요....</h2>
+	<h3 id="msg"></h3>
+</body>
+</html>

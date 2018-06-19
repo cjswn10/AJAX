@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="js/jquery-ui.min.css">
+<style type="text/css">
+*{
+	margin: 0px;
+	padding: 0px;
+}
+
+body {
+	font-size: 62.5%;
+}
+
+.item {
+	margin: 3px;
+	padding: 5px;
+}
+
+.item > img {
+	width: 100px;
+	height: 100px;
+}
+
+#wrap {
+	overflow: hidden;
+}
+
+#wrap > div {
+	float: left;
+}
+
+#dock{
+	position: fixed;
+	min-height: 120px;
+	width: 100%;
+	bottom: 0px;
+	z-index: 1;
+}
+
+#dock > div {
+	float: right;
+}
+</style>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="js\jquery-ui.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	
+	var loadGoods = function() {
+		$.getJSON("listGoods.jsp", function(arr) {
+			$("#tb").empty();
+			$.each(arr, function(i, m) {
+				var tr = $("<tr></tr>");
+				$.each(m, function(j, v) {
+					var td = $("<td></td>").html(v);
+					$(tr).append(td);
+				});
+				$("#tb").append(tr);
+						
+				$(tr).click(function() {
+					var tds = $(this).find("td");
+					$.each(inputArr, function(i, input) {
+						$(inputArr[i]).val($(tds[i]).html());
+					});
+				});
+			});
+		});
+	}
+	
+	for( var i = 0; i < 21; i++) {
+		var icon = "";
+		icon += "<div class='ui-widget-content ui-corner-all item'>";
+		icon += "<img src='goods/"+ i + ".jpg'>";
+		icon += "</div>";
+		
+		$("#wrap").append(icon);
+	}
+	
+	$("#wrap > div").draggable({
+		helper: "clone",
+		zIndex: 100,
+		scroll: false
+	});
+	
+	$("#dock").droppable({
+		accept: "#wrap > div",
+		drop: function(event, ui) {
+			$(ui.draggable).fadeOut(function() {
+				$(this).appendTo("#dock").fadeIn();
+			});
+		}
+		
+	});
+	
+	
+	$("body").droppable({
+		accept: "#dock > div",
+		drop: function(event, ui) {
+			$(ui.draggable).fadeOut(function() {
+				$(this).appendTo("#wrap").fadeIn();
+			});
+		}
+	});
+	
+});
+</script>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	<div id="wrap"></div>
+	<div id="dock" class="ui-state-error"></div>
+	
+</body>
+</html>

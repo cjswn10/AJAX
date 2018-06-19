@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	$.ajax({
+		url: "listGoods.jsp",
+		success: function(data) {
+			var g = eval("("+data+")");
+			var tr = $("<tr></tr>");
+			$.each(g, function(i, v){
+				$("<td></td>").html(v).appendTo(tr);
+			});
+			$("#goodsList").append(tr);
+		}
+	})
+})
+</script>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>상품목록</h2>
+<hr>
+<table id="goodsList">
+	<tr>
+		<td>상품번호</td>
+		<td>상품명</td>
+		<td>가격</td>
+		<td>수량</td>
+		<td>이미지</td>
+	</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	$.ajax({
+		url: "getGoods.jsp",
+		success: function(r){
+			var list = eval("(" + r + ")");
+			$.each(list, function(i, g) {
+				var li = $("<li></li>").html(g.no+"&nbsp;"+g.item);
+				$("ul").append(li);
+				
+				$(li).click(function() {
+					$("#detail").empty();
+					var img = $("<img/>").attr({
+						src: "img/" + g.fname,
+						width: 300
+					});
+					
+					$("#detail").append(img);
+					$("#detail").append("상품번호:" + g.no, " &nbsp;&nbsp;상품명:" + g.item, " &nbsp;&nbsp;가격:" + g.price, " &nbsp;&nbsp;수량:" + g.qty);
+				})
+			})
+			
+			
+			
+		}
+	})
+})
+
+</script>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>상품목록</h1>
+	<ul></ul>
+	<hr>
+	
+	<h2>상품상세</h2>
+	<div id="detail"></div>
+</body>
+</html>

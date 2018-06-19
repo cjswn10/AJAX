@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="style.css">
+<style>
+table, tr, td{
+	border: 1px solid gray;
+	border-collapse: collapse;
+}
+th {
+	background: #60AFF4;
+}
+</style>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	var inputArr = $("input");
+	/*
+	function loadMember() {
+		$.ajax({
+			url: "ListMember",
+			success: function(data) {
+				$("#tb").empty();
+				var arr = eval("(" + data + ")");
+				$.each(arr, function(i, m) {
+					var tr = $("<tr></tr>");
+					$.each(m, function(j, v) {
+						var td = $("<td></td>").html(v);
+						$(tr).append(td);
+					});
+					$("#tb").append(tr);
+					
+					$(tr).click(function() {
+						var tds = $(this).find("td");
+						$.each(inputArr, function(i, input) {
+							$(inputArr[i]).val($(tds[i]).html());
+						});
+					});
+				});
+			}		
+		});
+	}
+	*/
+	var loadMember = function() {
+		$.getJSON("ListMember", function(arr) {
+			$("#tb").empty();
+			$.each(arr, function(i, m) {
+				var tr = $("<tr></tr>");
+				$.each(m, function(j, v) {
+					var td = $("<td></td>").html(v);
+					$(tr).append(td);
+				});
+				$("#tb").append(tr);
+						
+				$(tr).click(function() {
+					var tds = $(this).find("td");
+					$.each(inputArr, function(i, input) {
+						$(inputArr[i]).val($(tds[i]).html());
+					});
+				});
+			});
+		});
+	}
+	
+	loadMember();
+	
+	$("#btnAdd").click(function() {
+		
+		var data = $("#F").serializeArray();
+		$.ajax({
+			url: "UpdateMember?cmd=1",
+			data: data,
+			success: function(members) {
+				var r = eval("("+ members +")");
+				if(r.result == '1') {
+					loadMember();
+				} else {
+					alert("등록실패");
+				}
+				$("input").val("");
+			}
+		});
+	});
+	
+	$("#btnUpdate").click(function() {
+		
+		var data = $("#F").serializeArray();
+		$.ajax({
+			url: "UpdateMember?cmd=2",
+			data: data,
+			success: function(members) {
+				var r = eval("("+ members +")");
+				if(r.result == '1') {
+					loadMember();
+				} else {
+					alert("수정실패");
+				}
+				$("input").val("");
+			}
+		});
+	});
+	
+	$("#btnDelete").click(function() {
+		var id = $("#id").val();
+		$.ajax({
+			url: "UpdateMember?cmd=3",
+			data: {id:id},
+			success: function(data) {
+				var r = eval("("+ data +")");
+				if(r.result == '1') {
+					loadMember();
+				} else {
+					alert("삭제실패");
+				}
+				$("input").val("");
+			}
+			
+		});
+	});
+});
+</script>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<div align="center">
+<form id="F">
+ 아이디: <input type="text" name="id" id="id"><br>
+ 이름: <input type="text" name="name" id="name"><br>
+ 나이: <input type="text" name="age" id="age"><br>
+ 주소: <input type="text" name="addr" id="addr">
+</form>
+
+<div class="button_base b05_3d_roll" id="btnAdd">
+        <div>ADD</div>
+        <div>등록</div>
+</div>
+
+<div class="button_base b05_3d_roll" id="btnUpdate">
+        <div>UPDATE</div>
+        <div>수정</div>
+</div>
+
+<div class="button_base b05_3d_roll" id="btnDelete">
+        <div>DELETE</div>
+        <div>삭제</div>
+</div>
+
+
+
+</div>
+<!-- 
+<button id="btnAdd">등록</button>
+<button id="btnUpdate">수정</button>
+<button id="btnDelete">삭제</button>
+ -->
+
+<table width="500px" align="center">
+	<thead>
+		<tr>
+			<th>아이디</th>
+			<th>이름</th>
+			<th>나이</th>
+			<th>주소</th>
+		</tr>
+	</thead>
+	<tbody id="tb"></tbody>
+</table>
+
+</body>
+</html>

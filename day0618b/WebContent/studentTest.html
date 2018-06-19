@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	$("#btnAdd").click(function() {
+		//$("#F").serialize();
+		var data = $("#F").serializeArray();
+		
+		$.ajax({
+			url: "insertStudent.jsp",
+			data: data,
+			success: function() {
+				alert(data)
+			}
+		})
+	});
+
+});
+</script>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	<form id="F">
+		번호: <input type="text" name="no" id="no"><br>
+		이름: <input type="text" name="name" id="name"><br>
+		국어: <input type="text" name="kor" id="kor"><br>
+		영어: <input type="text" name="eng" id="eng"><br>
+		수학: <input type="text" name="math" id="math"><br>
+	</form>
+	<button id="btnAdd">등록</button>
+</body>
+</html>

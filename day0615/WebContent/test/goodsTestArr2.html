@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#detail {
+	border: 5px solid white;
+	position: fixed;
+	top: 10px;
+	left: 600px;
+	width: 500px;
+	padding: 30px;
+	text-align: center;
+	border: 2px solid orange;
+	border-radius: 20px;
+}
+</style>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+$(function(){
+    $.ajax("listGoods.jsp",{
+       success:function(data){
+          
+          var list = eval("("+data+")");
+          $.each(list,function(i,g){
+             var tr = $("<tr></tr>");
+             $(tr).attr("idx",i);
+             var td1 = $("<td></td>").html(g.no);
+             var td2 = $("<td></td>").html(g.item);
+             
+             $(tr).append(td1,td2)
+             $("#tb").append(tr);
+             
+             $(tr).click(function(){
+                $("#detail").hide();
+                var idx = $(this).attr("idx");
+                var g = list[idx];
+                
+                $("#detailImg").attr("src","img/"+g.fname);
+                $("#no").html(g.no);
+                $("#item").html(g.item);
+                $("#price").html(g.price);
+                $("#qty").html(g.qty);
+                
+                $("#detail").show(1000);
+             });
+             
+             
+          });
+          
+       }
+    })
+    
+ });
+
+		                  
+		                  
+
+</script>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	<h2>상품목록</h2>
+	<table id="tb" border="1"  width="30%"></table>
+	<div id="detail">
+      <img id="detailImg" width="200" height="200"><br>
+	      상품번호 : <span id="no"></span><br>
+	      상품명 : <span id="item"></span><br>
+	      상품가격 : <span id="price"></span><br>
+	      상품수량 : <span id="qty"></span><br>
+   </div>
+
+</body>
+</html>

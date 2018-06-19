@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="Stylesheet" href="js\jquery-ui.min.css">
+<link rel="Stylesheet" href="css\ui.jqgrid.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="js\jquery-ui.min.js"></script>
+<script type="text/javascript" src="js\i18n\grid.locale-en.js"></script>
+<script type="text/javascript" src="js\jquery.jqGrid.min.js"></script>
+
+<script type="text/javascript">
+$(function() {
+	   
+	var customDialog = {
+  		  onclickSubmit: function(params) {
+  			  var selectedRow = $("#grid").getGridParam("selrow");
+  			  rowData = $("#grid").getRowData(selectedRow);
+  			  return {
+  				  bookid: rowData.bookid
+  			  };
+  		  }
+	};
+	
+	$("#grid").jqGrid({
+		 url: "listBook.jsp",
+		 editurl: "updateBook.jsp",
+		 pager: "#pager",
+		 caption: "도서목록",
+		 height: "100%",
+		 rowNum: 10,
+		 rowList: [10, 20, 30],
+		 	colNames: ["bookid", "bookname", "publisher", "price"],
+		 	colModel: [
+		 		{name: "bookid", index: "bookid", width: 50, editable: true},
+		 		{name: "bookname", index: "bookname", width: 200, editable: true},
+		 		{name: "publisher", index: "publisher", width: 200, editable: true},
+		 		{name: "price", index: "price", width: 100, editable: true}
+		 	]
+	}).navGrid("#pager", {
+	
+	    search : true,
+	    edit : true,
+	    add : true,
+	    del : true
+	}, customDialog, {}, customDialog);
+});
+</script>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	<table id="grid"></table>
+	<div id="pager"></div>
+</body>
+</html>

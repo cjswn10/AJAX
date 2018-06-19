@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	$("#btnOk").click(function() {
+		
+		$.ajax("lee.jsp", {
+			success: function(data){
+				$("#div").html(data);
+			}
+		})
+	})
+})
+
+</script>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	<button id="btnOk">불러오기</button>
+	<br>
+	메세지 :	<div id="div"></div>
+</body>
+</html>

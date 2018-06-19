@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	$.ajax("listGoodsXML.jsp", {
+		success: function(data) {
+			var arr = $(data).find("goods");
+			$.each(arr, function(){
+				var tr = $("<tr></tr>");
+				var no = $(this).find("no").html();
+				var item = $(this).find("item").html();
+				var price = $(this).find("price").html();
+				var qty = $(this).find("qty").html();
+				var fname = $(this).find("fname").html();
+				
+				$("<td></td>").html(no).appendTo(tr);
+				$("<td></td>").html(item).appendTo(tr);
+				$("<td></td>").html(price).appendTo(tr);
+				$("<td></td>").html(qty).appendTo(tr);
+				$("<td></td>").html(fname).appendTo(tr);
+				
+				$("table").append(tr);
+			})
+			
+		}
+	})	
+
+});
+</script>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>상품목록</h2>
+<table>
+	<tr>
+		<td>상품번호</td>
+		<td>상품이름</td>
+		<td>상품가격</td>
+		<td>상품수량</td>
+		<td>상품파일</td>
+	</tr>
+</table>
+</body>
+</html>

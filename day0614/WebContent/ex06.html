@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$("#btnOk").click(function() {
+			$.ajax("hello.jsp", {
+				success: function(data){
+					$("#msg").html(data);
+				}
+			});
+		})
+	})
+
+</script>
+
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1 id="msg"></h1>
+	<hr>
+	<button id="btnOk">jquery Ajax 통신</button>
+</body>
+</html>

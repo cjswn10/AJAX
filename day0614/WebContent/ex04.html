@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript">
+	window.onload = function() {
+		document.getElementById("btnRead").onclick = function() {
+			var request = new XMLHttpRequest();
+			request.open("GET", "getMember.jsp", false);
+			// true: 비동기  / false: 동기
+			request.send();
+			
+			document.getElementById("id").value = request.responseText;
+		}
+		
+	}
+
+</script>
+
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	회원 ID : <input type="text" id="id">
+	<button id="btnRead">Ajax와 통신하여 id 읽어오기</button>
+	<hr>
+	현재 자신의 생각을 쓰시오.<br>
+	<textarea rows="10" cols="60"></textarea>
+</body>
+</html>

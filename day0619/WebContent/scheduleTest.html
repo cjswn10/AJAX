@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="Stylesheet" href="js/jquery-ui.min.css">
+<style type="text/css">
+	body{
+		font-size: 62.5%;
+	}
+	
+	h1{
+		text-align: center;
+	}
+	
+	input[type=text],label {
+		margin-bottom: 12px;
+		width: 95%
+	}
+	
+</style>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	
+	var loadSchedule = function(){
+		$.getJSON("listSchedule.jsp",function(data){
+			$.each(data, function(i,s){
+				$("<h1></h1>").html(s.event_name+":"+s.event_date).appendTo("#output");
+			});
+		});
+	}
+	
+	var insertSchedule = function()
+	{
+		var event_name = $("#event_name").val();
+		var event_date = $("#event_date").val();
+		
+		var data = {event_name:event_name,event_date:event_date };
+		$.ajax({url:"insertSchedule.jsp",data:data,success:function(data){
+			var r = eval("("+data+")");
+			if(r.result == "1")
+			{
+				loadSchedule();
+			}
+			else
+			{
+				alert("일정등록에 실패하였습니다.");
+			}
+			
+		}});
+		
+		$("#event_name").val("");
+		$("#event_date").val("");
+		$("#dialog").dialog("close");
+		
+	}
+	
+	$("#open_button").click(function(){
+		$("#dialog").dialog("open");
+	});
+	
+	
+	$("#dialog").dialog({
+		autoOpen:false,
+		buttons:{
+			submit:function(){
+				insertSchedule();
+			},
+			reset:function(){
+				$("#event_name").val("");
+				$("#event_date").val("");
+			},
+			cancel:function(){
+				$("#event_name").val("");
+				$("#event_date").val("");
+				$("#dialog").dialog("close");	
+			}
+		},		
+		modal:true
+	});
+	$("#event_date").datepicker({
+		dateFormat:"yy년 mm월 dd일",
+		numberOfMonths:3
+	});
+});
+</script>
+</head>
+<body>
+	<h1 id="open_button">일정 생성</h1>
+	<hr>
+	<div id="output"></div>
+
+	<div id="dialog" title="일정입력">
+		<h1>일정 등록</h1>
+		<label for="event_name">일정이름</label>
+		<input type="text" id="event_name">		
+		<label for="event_date">날짜</label>
+		<input type="text" id="event_date">
+	</div>
+	
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

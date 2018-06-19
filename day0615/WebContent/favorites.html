@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="grim.css">
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	$.ajax({
+		url: "getFavo.jsp",
+		success: function(data) {
+			var list = eval("("+ data + ")");
+			$.each(list, function(i, f) {
+				var a = $("<a></a>").attr({
+					href:"#"
+				}).html(f.favoId);
+				var br = $("<br></br>");
+				$("#favo_list").append(a, br);
+			})
+		}
+	});
+	
+	
+});
+</script>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+<a href="#" class="main">그림일기</a>
+
+<div class="upper">
+<span class="upper_menu">임연주님</span>
+<a href="#" class="upper_menu">마이페이지</a>
+<a href="#" class="upper_menu">로그아웃</a>
+</div>
+<hr>
+
+<div class="menus" align="right">
+<a href="#" class="main_menu">일기장</a>
+<a href="#" class="main_menu">그룹일기</a>
+<a href="#" class="main_menu">즐겨찾기</a>
+</div>
+
+<div class="title_favo" align="center">
+<img alt="★" src="img/star.png" width="80px">
+<span style="font-size: 50px;">즐겨찾기</span>
+</div>
+
+<div id="favo_list" align="center"></div>
+</body>
+</html>

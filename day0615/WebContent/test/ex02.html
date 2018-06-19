@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	$.ajax("listStudent.jsp", {
+		success: function(data) {
+			var list = eval("("+data+")");
+			
+			$.each(list, function(i, s) {
+				
+				var total = eval(s.kor) + eval(s.eng) + eval(s.math);
+				var avg = total / 3;
+				
+				var tr = $("<tr></tr>");
+				
+				$.each(s, function(i, v) {
+					var td = $("<td></td>").html(v);
+					$(tr).append(td);
+				})
+				var td1 = $("<td></td>").html(total);
+				var td2 = $("<td></td>").html(avg);
+				
+				$(tr).append(td1, td2)
+				$("#tb").append(tr);
+				
+			})
+			
+		}
+	});
+})
+</script>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	<table id="tb" border="1" width="80%">
+		<tr>
+			<td>번호</td>
+			<td>이름</td>
+			<td>국어</td>
+			<td>영어</td>
+			<td>수학</td>
+			<td>총점</td>
+			<td>평균</td>
+		</tr>
+	</table>
+</body>
+</html>

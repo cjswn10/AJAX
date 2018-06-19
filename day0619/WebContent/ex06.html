@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="js/jquery-ui.min.css">
+<style type="text/css">
+.box {
+	padding: 5px;
+}
+
+.box p {
+	margin:0px;
+	padding: 5px;
+	text-align: center;
+}
+</style>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="js\jquery-ui.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	
+	$("#radio").buttonset();
+	
+	$("#radio>input").change(function() {
+		var r = $(this).val();
+		$("#output").addClass("ui-state-"+r)
+	})
+
+});
+</script>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<div id="radio">
+	<input type="radio" id="highlight" value="highlight">
+	<label for="highlight">highlight</label>
+	
+	<input type="radio" id="error" value="error">
+	<label for="error">error</label>
+	
+	<input type="radio" id="error_text" value="error_text">
+	<label for="error_text">error_text</label>
+	
+	<input type="radio" id="disabled" value="disabled">
+	<label for="disabled">disabled</label>
+</div>
+
+	<div id="button" class="box ui-state-default">
+		<p>아침, 점심, 저녁, 간식, 야식, 새참</p>
+	</div>
+</body>
+</html>

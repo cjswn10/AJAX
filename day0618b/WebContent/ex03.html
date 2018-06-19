@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	var person = {
+			name: "홍길동",
+			age: 20
+	}
+
+	$("button").click(function(){
+		var str = $.param(person);
+		$("h2").html(str);
+	})
+});
+</script>
+<meta charset="utf-8">
+<title>Insert title here</title>
+</head>
+<body>
+<button>$.param()</button>
+<h2></h2>
+</body>
+</html>
