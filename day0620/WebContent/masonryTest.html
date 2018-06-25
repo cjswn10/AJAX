@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="Stylesheet" href="css\jquery.lightbox-0.5.css">
+<style type="text/css">
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+body {
+	background: #525252;
+}
+
+.item {
+	margin:5px;
+	width: 100px;
+	height: 100px;
+	
+	background: white;
+	border-radius: 10px;
+	float: left;
+}
+
+.big {
+	width: 210px;
+	height: 430px;
+}
+
+.normal {
+	width: 210px;
+	height: 210px;
+}
+
+.small {
+	width: 100px;
+	height: 100px;
+}
+</style>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<script src="js/jquery.lightbox-0.5.js"></script>
+<script type="text/javascript">
+$(function() {
+	$("#masonry_container").masonry({
+		itemSelector: ".item",
+		columnWidth: 110
+	});
+});
+</script>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	<div id="masonry_container">
+		<div class="item small">이현진</div>
+		<div class="item big">한상협</div>
+		<div class="item normal">조성재</div>
+		<div class="item small">김종호</div>
+		<div class="item small">송명준</div>
+		<div class="item small">이태호</div>
+		<div class="item normal">임연주</div>
+		<div class="item normal">변성인</div>
+		<div class="item big">차건우</div>
+		<div class="item small">성민규</div>
+		<div class="item small">김영호</div>
+		<div class="item small">배현준</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="Stylesheet" href="css\jquery.lightbox-0.5.css">
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="js/jquery.lightbox-0.5.js"></script>
+<script type="text/javascript">
+$(function() {
+	var loadDept = function() {
+		$.getJSON("listDept.jsp", function(arr) {
+			$("#tb").empty();
+			$.each(arr, function(i, d) {
+				var tr = $("<tr></tr>");
+				$.each(d, function(j, v) {
+					$("<td><td>").html(v).appendTo(tr);
+				});
+				$("#tb").append(tr);
+				
+			});//end each(arr)
+		});
+	};
+		
+	loadDept();
+	
+	
+	
+		
+});
+</script>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<table>
+	<thead>
+		<th>부서번호</th>
+		<th>부서이름</th>
+		<th>부서위치</th>
+	</thead>
+	<tbody id="tb"></tbody>
+</table>
+</body>
+</html>
